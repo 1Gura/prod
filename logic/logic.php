@@ -1,7 +1,6 @@
 <?php
 function authorize($login,$password) {
-   $user = getUser($login, $password);
-   var_dump($user);
+    return getUser($login, $password);
 }
 
 function checkRegularEmail($email): bool

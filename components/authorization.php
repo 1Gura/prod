@@ -3,7 +3,7 @@ require_once '../templates/header.php';
 $emailNotValid = checkRegularEmail($_POST['email']);
 $passwordNotValid = checkRegularEmail($_POST['password']);
 if (!empty($_POST) && !$emailNotValid) {
-    authorize(
+    $flag = authorize(
         $_POST['email'],
         $_POST['password']
     );

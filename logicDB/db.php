@@ -12,16 +12,19 @@ function connectDB() {
     return $connect;
 }
 
-function getUser($login, $password) {
-    $connect = connectDB();
-    $login = 'ilya@mail.com';
-    $user = mysqli_query($connect,
-        "select * from users u where u.email like '$login' limit 1"
-    );
-    $result = mysqli_fetch_assoc($user);
-    var_dump($result['password']);
-    var_dump(password_verify(password, $result['password']));
-    if (password_verify(password, $result['password'])) return $result;
+function getUser($login, $password)
+{
+    $connect = connectDb();
+    $login = mysqli_real_escape_string($connect, $login);
+    $result = mysqli_query($connect, "select * from users u where u.email = '$login' limit 1");
+    $passwordBD = '';
+    $user = mysqli_fetch_assoc($result);
+
+    mysqli_close($connect);
+    if (password_verify($password, $user['password'])) {
+        var_dump('Успех!');
+        return $user;
+    }
     return false;
 }
 

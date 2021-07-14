@@ -1,8 +1,6 @@
 <?php
 require_once './templates/header.php';
 $hash = password_hash('123456',PASSWORD_DEFAULT);
-var_dump($hash);
-var_dump(password_verify('123456', '$2y$10$nNDgVK2SQ8FKLfu4.Ihqq.ZMDu2XF6jf3lT1UuB4BGfn8v8AfV1Vm'));
 ?>
 
 <main class="shop-page">
