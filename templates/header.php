@@ -1,6 +1,5 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/logicDB/db.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/logic/logic.php';
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="ru">

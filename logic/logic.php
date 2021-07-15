@@ -1,6 +1,23 @@
 <?php
+session_start();
 function authorize($login,$password) {
-    return getUser($login, $password);
+    $user = getUser($login, $password);
+    if($user) {
+        $userId =$user['id'];
+        $roles = getRoles($userId);
+        $_SESSION['user']['id'] = $user['id'];
+        $_SESSION['user']['name'] = $user['name'];
+        $_SESSION['user']['email'] = $user['email'];
+        $_SESSION['user']['roles'] = $roles;
+        unset($_SESSION['email']);
+        unset($_SESSION['password']);
+        header('Location: /components/admin.php');
+        exit();
+    }
+    $_SESSION['email'] = $login;
+    $_SESSION['password'] = $password;
+    header('Location: /components/authorization.php?error=error');
+    exit();
 }
 
 function checkRegularEmail($email): bool
@@ -21,5 +38,4 @@ function checkRegularPassword($password): bool
         }
     }
     return false;
-
 }
