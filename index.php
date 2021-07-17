@@ -51,7 +51,7 @@ $hash = password_hash('123456',PASSWORD_DEFAULT);
           <input type="checkbox" name="sale" id="sale" class="custom-form__checkbox">
           <label for="sale" class="custom-form__checkbox-label custom-form__info" style="display: block;">Распродажа</label>
         </fieldset>
-        <button class="button" type="submit" style="width: 100%">Применить</button>
+        <button class="button" type="submit" style="width: 100%" onclick="getAllProducts()">Применить</button>
       </form>
     </section>
 

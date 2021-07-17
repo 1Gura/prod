@@ -19,7 +19,7 @@ switch ($method) {
     case $method === 'GET':
         if ($type === 'catalog') {
             if (!empty($_GET['category'])) {
-                getCatalog($connect, $_GET['category']);
+                getCatalog($connect, $_GET);
             } else if (isset($id)) {
                 getCatalogElement($connect, $id);
             } else {

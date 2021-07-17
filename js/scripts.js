@@ -6,8 +6,15 @@ class Service {
     constructor() {
     }
 
-    getProducts(param = null) {
-        fetch(`https://prod/shop/catalog?${param ? `category=${param}` : ''}`)
+    getProducts(filter = null) {
+        debugger
+        fetch(`https://prod/shop/catalog?${filter
+            ? `category=${
+                filter.idCategory
+            }
+            &minPrice=${filter.minPrice}
+            &maxPrice=${filter.maxPrice}`
+            : ''}`)
             .then(response => response.json())
             .then(json => listProducts = json)
             .then(listProducts => {
@@ -54,7 +61,15 @@ const getAllProducts = () => {
         event.preventDefault();
         const param = event.currentTarget.innerText;
         const idCategory = service.getIdCategory(param);
-        service.getProducts(idCategory);
+        const minPrice = document.querySelector('.min-price').innerText;
+        const maxPrice = document.querySelector('.max-price').innerText;
+        const filter = {
+            idCategory: idCategory,
+            minPrice: minPrice.replace(/([^0-9])+/, ''),
+            maxPrice: maxPrice.replace(/([^0-9])+/, '')
+        };
+        debugger
+        service.getProducts(filter);
     } else {
         service.getProducts();
     }
@@ -67,17 +82,11 @@ if (shopList) {
 //МОЙ КОД
 
 const toggleHidden = (...fields) => {
-
     fields.forEach((field) => {
-
         if (field.hidden === true) {
-
             field.hidden = false;
-
         } else {
-
             field.hidden = true;
-
         }
     });
 };
@@ -382,16 +391,13 @@ if (document.querySelector('.shop-page')) {
         values: [350, 32000],
         range: true,
         stop: function (event, ui) {
-
             $('.min-price').text($('.range__line').slider('values', 0) + ' руб.');
             $('.max-price').text($('.range__line').slider('values', 1) + ' руб.');
 
         },
         slide: function (event, ui) {
-
             $('.min-price').text($('.range__line').slider('values', 0) + ' руб.');
             $('.max-price').text($('.range__line').slider('values', 1) + ' руб.');
-
         }
     });
 

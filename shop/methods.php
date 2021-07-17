@@ -1,13 +1,20 @@
 <?php
 function getCatalog($connect, $params = null)
 {
-    $params
+    $categoryId = $params['category'];
+    $minPrice = $params['minPrice'];
+    $maxPrice = $params['maxPrice'];
+    $categoryId
         ? $items = mysqli_query($connect, "
         select distinct c2.*  from category c
-        join catalog_has_category chc on '$params' = chc.category_id
+        join catalog_has_category chc on '$categoryId' = chc.category_id
         join catalog c2 on chc.catalog_id = c2.id
+        where c2.price > '$minPrice' and c2.price < '$maxPrice'
         ")
-        : $items = mysqli_query($connect, 'select * from catalog');
+        : $items = mysqli_query($connect, "
+            select * from catalog c
+            where c.price > '$minPrice' and c.price < '$maxPrice'
+");
     $itemList = [];
     while ($item = mysqli_fetch_assoc($items)) {
         $itemList[] = $item;
