@@ -1,30 +1,67 @@
 'use strict';
 
 //МОЙ КОД
+//Класс для взаимодействия с сервером
+class Service {
+    constructor() {
+    }
+
+    getProducts(param = null) {
+        fetch(`https://prod/shop/catalog?${param ? `category=${param}` : ''}`)
+            .then(response => response.json())
+            .then(json => listProducts = json)
+            .then(listProducts => {
+                if (listProducts.length === 0) {
+                    shopList.innerHTML = `<h1>Товры данной категории отсутствуют на складе :(</h1>`
+                } else {
+                    listProducts.forEach((product) => {
+                        shopList.innerHTML += `
+                        <article class="shop__item product" tabindex="0">
+                          <div class="product__image">
+                            <img src="img/products/${product.img}" alt="product-name">
+                          </div>
+                          <p class="product__name">${product.name}</p>
+                          <span class="product__price">${product.price} руб.</span>
+                        </article>
+                        `;
+                    })
+                }
+            });
+    }
+
+    getIdCategory(name) {
+        switch (name) {
+            case 'Женщины' :
+                return 1
+            case 'Мужчины' :
+                return 2
+            case 'Дети' :
+                return 3
+            case 'Аксессуары' :
+                return 4
+        }
+    }
+}
+
+//Класс для взаимодействия с сервером
+
+const service = new Service();
 const shopList = document.querySelector('.shop__list');
 let listProducts = [];
 const getAllProducts = () => {
-    fetch('https://jsonplaceholder.typicode.com/todos')
-        .then(response => response.json())
-        .then(json => listProducts = json)
-        .then(listProducts => {
-            listProducts.forEach((product) => {
-                shopList.innerHTML += `
-                <article class="shop__item product" tabindex="0">
-                  <div class="product__image">
-                    <img src="img/products/product-1.jpg" alt="product-name">
-                  </div>
-                  <p class="product__name">Платье со складками</p>
-                  <span class="product__price">2 999 руб.</span>
-                </article>
-                `
-                ;
-            })
-        });
+    shopList.innerHTML = '';
+    if (event) {
+        event.preventDefault();
+        const param = event.currentTarget.innerText;
+        const idCategory = service.getIdCategory(param);
+        service.getProducts(idCategory);
+    } else {
+        service.getProducts();
+    }
 }
 
+
 if (shopList) {
-    debugger;
     getAllProducts();
 }
 //МОЙ КОД

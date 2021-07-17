@@ -17,19 +17,19 @@ $hash = password_hash('123456',PASSWORD_DEFAULT);
           <b class="filter__title">Категории</b>
           <ul class="filter__list">
             <li>
-              <a class="filter__list-item active" href="#">Все</a>
+              <a class="filter__list-item active" href="" onclick="getAllProducts()">Все</a>
             </li>
             <li>
-              <a class="filter__list-item" href="#">Женщины</a>
+              <a class="filter__list-item" href="" onclick="getAllProducts()">Женщины</a>
             </li>
             <li>
-              <a class="filter__list-item" href="#">Мужчины</a>
+              <a class="filter__list-item" href="" onclick="getAllProducts()">Мужчины</a>
             </li>
             <li>
-              <a class="filter__list-item" href="#">Дети</a>
+              <a class="filter__list-item" href="" onclick="getAllProducts()">Дети</a>
             </li>
             <li>
-              <a class="filter__list-item" href="#">Аксессуары</a>
+              <a class="filter__list-item" href="" onclick="getAllProducts()">Аксессуары</a>
             </li>
           </ul>
         </div>
@@ -74,14 +74,14 @@ $hash = password_hash('123456',PASSWORD_DEFAULT);
         <p class="shop__sorting-res">Найдено <span class="res-sort">858</span> моделей</p>
       </section>
       <section class="shop__list"></section>
-      <ul class="shop__paginator paginator">
-        <li>
-          <a class="paginator__item">1</a>
-        </li>
-        <li>
-          <a class="paginator__item" href="">2</a>
-        </li>
-      </ul>
+<!--      <ul class="shop__paginator paginator">-->
+<!--        <li>-->
+<!--          <a class="paginator__item">1</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a class="paginator__item" href="">2</a>-->
+<!--        </li>-->
+<!--      </ul>-->
     </div>
   </section>
   <section class="shop-page__order" hidden="">
